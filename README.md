@@ -15,3 +15,8 @@ npx create-react-app box-office --template cra-template-pwa --use-npm
 npm install -g install-peerdeps
 install-peerdeps --dev eslint-config-airbnb
 ```
+
+## : `Installing Prettier extension` 
+```
+npm install --save-dev eslint-config-prettier
+```
