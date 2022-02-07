@@ -10,6 +10,11 @@ npx create-react-app box-office --template cra-template-pwa --use-npm
 
 `used for creating PWA`
 
+## : `Installing all libraries` 
+```
+npm install -D rimraf eslint prettier babel-eslint eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-jsx-a11y eslint-plugin-import eslint-config-prettier eslint-config-airbnb
+```
+
 ## : `Installing Airbnb extension` 
 ```
 npm install -g install-peerdeps
