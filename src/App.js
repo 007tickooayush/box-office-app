@@ -5,11 +5,10 @@ function App() {
   return (
     <div className="App">
       <Switch>
-        <Route path="/"> 
+        <Route exact={true} path="/"> 
         This is home page
         </Route>
       </Switch>
-      hi
     </div>
   );
 }
