@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["eslint:recommended","airbnb", "prettier"],
   "env": {
     "browser": true
   },
@@ -12,9 +12,11 @@
     "react/jsx-props-no-spreading": [0],
     "import/prefer-default-export": [0],
     "react/no-array-index-key": [0],
-    "no-console": "off",
     "arrow-body-style": [0],
+    "prefer-arrow-callback": [0],
+    "no-console": "off",
     "react/self-closing-comp": [0],
-    "jsx-a11y/anchor-is-valid":[0]
+    "jsx-ally/anchor-is-valid":[0],
+    "react/function-component-definition":[0]
   }
 }
