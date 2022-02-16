@@ -3,9 +3,11 @@ import ShowCard from './ShowCard';
 
 import IMAGE_NOT_FOUND from '../../images/not-found.png';
 
+import {FlexGrid} from '../styled';
+
 function ShowGrid({ data }) {
   return (
-    <div>
+    <FlexGrid>
       {data.map(({show}) => (
         <ShowCard
           key={show.id}
@@ -15,7 +17,7 @@ function ShowGrid({ data }) {
           summary={show.summary}
         />
       ))}
-    </div>
+    </FlexGrid>
   );
 }
 
