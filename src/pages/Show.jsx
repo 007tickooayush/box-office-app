@@ -29,7 +29,7 @@ const initialState = {
   error: null,
 };
 
-function Show() {
+const Show = () => {
   // destructuring and fetching only the 'id' param
   const { id } = useParams();
 

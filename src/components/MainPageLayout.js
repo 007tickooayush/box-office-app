@@ -7,7 +7,7 @@ function MainPageLayout({ children }) {
     <div>
       <Title
         title="Box Office"
-        subtitle="are you lokking for a movie or an actor?S"
+        subtitle="Are you looking for a movie/show or an actor?"
       />
       <Navs />
       {children}
