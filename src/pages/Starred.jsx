@@ -18,8 +18,8 @@ const Starred = () => {
       Promise.all(promises)
       .then(apiData => apiData.map(show => ({show}))) // putting the API data into the show state present in ShowGrid.jsx component
       .then(results => {
-        // logging resultant
-        console.log(results);
+        // logging resultant starred show data
+        // console.log(results);
 
         setShows(results);
         setIsLoading(false);

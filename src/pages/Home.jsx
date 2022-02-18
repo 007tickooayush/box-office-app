@@ -3,9 +3,11 @@ import ActorGrid from '../components/actor/ActorGrid';
 import MainPageLayout from '../components/MainPageLayout';
 import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
+import { useLastQuery } from '../misc/custom-hooks';
 
-function Home() {
-  const [input, setInput] = useState('');
+const Home = () => {
+
+  const [input, setInput] = useLastQuery(); // custom hook to update the page but not the input field
   const [results, setResults] = useState(null);
   const [searchOption, setSearchOption] = useState('shows');
 

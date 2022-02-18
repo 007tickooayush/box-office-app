@@ -1,75 +1,27 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useState, useEffect, useReducer } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import Cast from '../components/show/Cast';
 import Details from '../components/show/Details';
 import Seasons from '../components/show/Seasons';
 import ShowMainData from '../components/show/ShowMainData';
-import { apiGet } from '../misc/config';
 import { InfoBlock, ShowPageWrapper } from './Show.styled';
+import {useShow} from '../misc/custom-hooks';
 
-
-const reducer = (prevState, action) => {
-  switch (action.type) {
-    case 'FETCH_SUCCESS': {
-      return { isLoading: false, error: null, show: action.show };
-    }
-
-    case 'FETCH_FAILED': {
-      return { ...prevState, isLoading: false, error: action.error };
-    }
-    default:
-      return prevState;
-  }
-};
-
-const initialState = {
-  show: null,
-  isLoading: true,
-  error: null,
-};
 
 const Show = () => {
   // destructuring and fetching only the 'id' param
   const { id } = useParams();
 
-  const [{ show, isLoading, error }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  // using custom hook to load data
+  const { show,isLoading,error } = useShow(id);
 
   //   const [show, setShow] = useState(null);
   //   const [isLoading, setIsLoading] = useState(true);
   //   const [error, setError] = useState('');
 
   // console.log('params',params);
-  useEffect(() => {
-    let isMounted = true;
 
-    apiGet(`/shows/${id}?embed[]=seasons&embed[]=cast`)
-      .then(results => {
-        if (isMounted) {
-          // using dispatch function instead of multiple state updates
-          dispatch({ type: 'FETCH_SUCCESS', show: results });
-
-          //   setShow(results);
-          //   setIsLoading(false);
-        }
-      })
-      .catch(err => {
-        if (isMounted) {
-          // using dispatch functoin to update error
-          dispatch({ type: 'FETCH_FAILED', error: err.message });
-
-          //   setError(err.message);
-          //   setIsLoading(false);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [id]);
 
   // log the show details json Obj
   // console.log('show', show);
