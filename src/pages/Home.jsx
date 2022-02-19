@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
 import CustomRadio from '../components/CustomRadio';
 import MainPageLayout from '../components/MainPageLayout';
@@ -11,6 +11,21 @@ import {
   SearchInput,
 } from './Home.styled';
 
+// defining results outside the component
+const renderResults = results => {
+  if (results && results.length === 0) {
+    return <div> NO RESULTS</div>;
+  }
+  if (results && results.length !== 0) {
+    return results[0].show ? (
+      <ShowGrid data={results} />
+    ) : (
+      <ActorGrid data={results} />
+    );
+  }
+  return null;
+};
+
 const Home = () => {
   const [input, setInput] = useLastQuery(); // custom hook to update the page but not the input field
   const [results, setResults] = useState(null);
@@ -18,10 +33,13 @@ const Home = () => {
 
   const isShowsSearch = searchOption === 'shows';
 
-  const onInputChange = ev => {
-    setInput(ev.target.value);
-    // console.log(ev.target.value);
-  };
+  const onInputChange = useCallback(
+    ev => {
+      setInput(ev.target.value);
+      // console.log(ev.target.value);
+    },
+    [setInput]
+  );
 
   const onSearch = () => {
     apiGet(`/search/${searchOption}?q=${input}`).then(result => {
@@ -38,24 +56,15 @@ const Home = () => {
     // console.log(ev.keyCode);
   };
 
-  const renderResults = () => {
-    if (results && results.length === 0) {
-      return <div> NO RESULTS</div>;
-    }
-    if (results && results.length !== 0) {
-      return results[0].show ? (
-        <ShowGrid data={results} />
-      ) : (
-        <ActorGrid data={results} />
-      );
-    }
-    return null;
-  };
+  // using  to see the reason of rerender
+  // useWhyDidYouUpdate('home',{onInputChange,onKeyDown});
 
-  const onRadioChange = ev => {
+  // using a react hook to render the function only once since memo can not preven it from rerenderring
+  // (REASON: objects in js are compared by reference not by value)
+  const onRadioChange = useCallback(ev => {
     setSearchOption(ev.target.value);
     // console.log(ev.target.value);
-  };
+  }, []);
 
   return (
     <MainPageLayout>
@@ -94,7 +103,7 @@ const Home = () => {
         </button>
       </SearchButtonWrapper>
 
-      {renderResults()}
+      {renderResults(results)}
     </MainPageLayout>
   );
 };
