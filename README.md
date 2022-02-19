@@ -36,6 +36,12 @@ npm install react-fade-in
 npm install -D rimraf eslint prettier babel-eslint eslint-plugin-react eslint-plugin-jsx-a11y eslint-plugin-jsx-a11y eslint-plugin-import eslint-config-prettier eslint-config-airbnb
 ```
 
+## : `Installing GH(Github) Pages`
+```
+npm install --save gh-pages
+```
+
+# [AUX/Corrections]
 ## : `Installing Airbnb extension` 
 ```
 npm install -g install-peerdeps
