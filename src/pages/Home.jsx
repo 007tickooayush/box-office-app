@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import ActorGrid from '../components/actor/ActorGrid';
+import CustomRadio from '../components/CustomRadio';
 import MainPageLayout from '../components/MainPageLayout';
 import ShowGrid from '../components/show/ShowGrid';
 import { apiGet } from '../misc/config';
 import { useLastQuery } from '../misc/custom-hooks';
+import {
+  RadioInputsWrapper,
+  SearchButtonWrapper,
+  SearchInput,
+} from './Home.styled';
 
 const Home = () => {
-
   const [input, setInput] = useLastQuery(); // custom hook to update the page but not the input field
   const [results, setResults] = useState(null);
   const [searchOption, setSearchOption] = useState('shows');
@@ -55,42 +60,43 @@ const Home = () => {
   return (
     <MainPageLayout>
       {/* associated the input State with input field by using `value = {input}` */}
-      <input
+      <SearchInput
         onChange={onInputChange}
         value={input}
         onKeyDown={onKeyDown}
         placeholder="Search for something"
       />
-      <div>
-        <label htmlFor="shows-search">
-          Shows
-          <input
+      <RadioInputsWrapper>
+        <div>
+          <CustomRadio
+            label="Shows"
             id="shows-search"
-            type="radio"
             value="shows"
             checked={isShowsSearch}
             onChange={onRadioChange}
           />
-        </label>
+        </div>
 
-        <label htmlFor="actors-search">
-          Actors
-          <input
+        <div>
+          <CustomRadio
+            label="Actors"
             id="actors-search"
-            type="radio"
             value="people"
             checked={!isShowsSearch}
             onChange={onRadioChange}
           />
-        </label>
-      </div>
+        </div>
+      </RadioInputsWrapper>
 
-      <button type="button" onClick={onSearch}>
-        Search
-      </button>
+      <SearchButtonWrapper>
+        <button type="button" onClick={onSearch}>
+          Search
+        </button>
+      </SearchButtonWrapper>
+
       {renderResults()}
     </MainPageLayout>
   );
-}
+};
 
 export default Home;
